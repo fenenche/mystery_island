@@ -57,6 +57,17 @@ class TestMysteryIsland(unittest.TestCase):
         self.assertFalse(result)
         self.assertEqual(player["location"], "Jungle")
 
+    def test_cannot_enter_cave_from_beach(self):
+        player = create_player("Favour")
+        original_energy = player["energy"]
+
+        result = move_to_cave(player, "1", "1")
+
+        self.assertFalse(result)
+        self.assertEqual(player["location"], "Beach")
+        self.assertEqual(player["energy"], original_energy)
+        self.assertNotIn("lantern", player["inventory"])
+
     def test_invalid_cave_search(self):
         player = create_player("Favour")
         move_to_jungle(player, "no")

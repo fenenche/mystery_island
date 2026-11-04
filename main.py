@@ -56,23 +56,22 @@ def play_game():
 
         if choice == "Jungle" and player["location"] == "Beach":
 
-            search = "no"
-
+            wreckage_choice = "no"
             if not player["searched_wreckage"]:
-                search = input(
+                wreckage_choice = input(
                     "Search the wreckage for supplies? (yes/no): "
                 ).strip().lower()
 
-                if search not in ["yes", "no"]:
+                if wreckage_choice not in ["yes", "no"]:
                     print("Invalid answer. Try again!")
                     continue
 
-                if search == "yes":
-                    print("You found food! You gained 2 energy.")
+                if wreckage_choice == "yes":
+                    print("Searching cost 1 energy, but you found food and gained 2 energy!")
                 else:
                     print("You decided to leave the wreckage.")
 
-            if move_to_jungle(player, search):
+            if move_to_jungle(player, wreckage_choice):
                 print("You entered the Jungle!")
                 print("You found a rope!")
 
@@ -92,13 +91,13 @@ def play_game():
             print("1. Search carefully (costs 1 energy)")
             print("2. Search quickly (costs 2 energy)")
 
-            search = input("Choose your search method (1/2): ").strip()
+            cave_search_method = input("Choose your search method (1/2): ").strip()
 
-            if search not in ["1", "2"]:
+            if cave_search_method not in ["1", "2"]:
                 print("Invalid choice. Try again!")
                 continue
 
-            if move_to_cave(player, path, search):
+            if move_to_cave(player, path, cave_search_method):
                 if path == "1":
                     print("You safely followed the Jungle path!")
                 else:
@@ -106,7 +105,7 @@ def play_game():
 
                 print("You entered the Cave!")
 
-                if search == "1":
+                if cave_search_method == "1":
                     print("You carefully searched the Cave.")
                 else:
                     print("You rushed through the Cave.")
